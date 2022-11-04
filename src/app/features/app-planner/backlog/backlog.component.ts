@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BacklogComponent implements OnInit {
 
-  constructor() { }
+  Rest = 'asd';
+
+
+  fn(x: string) {
+    return parseInt(x);
+  }
+
+
 
   ngOnInit(): void {
+
   }
+
+
+
 
 }
