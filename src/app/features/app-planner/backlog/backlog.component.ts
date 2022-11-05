@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BacklogComponent implements OnInit {
 
-  Rest = 'asd';
+  x = [1, 2, 3];
 
 
   fn(x: string) {
@@ -15,12 +15,10 @@ export class BacklogComponent implements OnInit {
   }
 
 
-
   ngOnInit(): void {
 
+
+    
   }
-
-
-
 
 }
