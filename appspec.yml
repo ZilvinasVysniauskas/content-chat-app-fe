@@ -1,0 +1,19 @@
+version: 0.0
+os: linux
+files:
+  - source: dist/content-chat-app
+    destination: /var/www/content-chat-app
+permissions:
+  - object: /var/www/content-chat-app
+    pattern: '**'
+    mode: '0755'
+    owner: root
+    group: root
+    type:
+      - file
+      - directory
+hooks:
+  ApplicationStart:
+    - location: deploy-scripts/application_start.sh
+      timeout: 300
+      
