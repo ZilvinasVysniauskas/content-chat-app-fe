@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { InputNames } from '../../constants';
 
 @Component({
   selector: 'app-register',
@@ -12,24 +13,19 @@ import { AuthService } from '../../services/auth.service';
   ],
   providers: [AuthService]
 })
-export class RegisterComponent implements OnInit {
-  registerForm: FormGroup = this.fb.group({
-    username: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', Validators.required],
-    passwordRepeat: ['', Validators.required],
+export class RegisterComponent {
+  
+  registerForm: FormGroup = this.formBuilder.group({
+    [InputNames.email]: ['', [Validators.required, Validators.email]],
+    [InputNames.password]: ['', [Validators.required, Validators.minLength(6)]],
+    [InputNames.passwordRepeat]: ['', Validators.required],
+    [InputNames.username]: ['', [Validators.required, Validators.minLength(6)]],
   });
 
-  constructor(private fb: FormBuilder, private authService: AuthService) { }
-
-  ngOnInit(): void {
-  }
+  constructor(private formBuilder: FormBuilder, private authService: AuthService) { }
 
   onSubmit(): void {
-    //todo fix types
-    this.authService.registerUser(this.registerForm.value).subscribe((user) =>
-      console.log('User registered: ', user)
-    );
+    this.authService.registerUser(this.registerForm.value);
   }
 
 }

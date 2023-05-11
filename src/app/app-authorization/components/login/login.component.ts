@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { InputNames } from '../../constants';
 
 @Component({
   selector: 'app-login',
@@ -14,14 +15,18 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent {
   loginForm: FormGroup = this.formBuilder.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(6)]],
-    remember: [false]
+    [InputNames.email]: ['', [Validators.required, Validators.email]],
+    [InputNames.password]: ['', [Validators.required, Validators.minLength(6)]],
   });
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService) { }
 
-  onSubmit(): void {   
-    this.authService.loginUser(this.loginForm.value).subscribe(() => console.log('works'));
+  onSubmit(): void {
+    if (this.loginForm.valid) {
+      this.authService.loginUser({
+        email: this.loginForm.value[InputNames.email],
+        password: this.loginForm.value[InputNames.password]
+      });
+    }
   }
 }
