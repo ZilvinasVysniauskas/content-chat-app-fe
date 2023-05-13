@@ -10,13 +10,12 @@ import { InputNames } from '../../constants';
   standalone: true,
   imports: [
     ReactiveFormsModule
-  ],
-  providers: [AuthService]
+  ]
 })
 export class LoginComponent {
   loginForm: FormGroup = this.formBuilder.group({
     [InputNames.email]: ['', [Validators.required, Validators.email]],
-    [InputNames.password]: ['', [Validators.required, Validators.minLength(6)]],
+    [InputNames.password]: ['', [Validators.required]],
   });
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService) { }
@@ -26,7 +25,7 @@ export class LoginComponent {
       this.authService.loginUser({
         email: this.loginForm.value[InputNames.email],
         password: this.loginForm.value[InputNames.password]
-      });
+      }).subscribe();
     }
   }
 }

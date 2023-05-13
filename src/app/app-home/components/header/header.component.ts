@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/app-authorization/services/auth.service';
 export class HeaderComponent {
 
   constructor(private authService: AuthService) { }
+  
   onLogout() {
     this.authService.logout();
   }
