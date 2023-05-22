@@ -1,0 +1,28 @@
+<div class="chat-container">
+  <h1>{{roomName}}</h1>
+  <div class="chat-messages" #scrollContainer>
+    <ul>
+      <li *ngFor="let message of messages">
+        <p *ngIf="message.message">{{ message.message }}</p>
+        <div *ngIf="message.file">
+          <ng-container *ngIf="isImage(message.file.fileName); else videoContent">
+            <img [src]="message.file.url" />
+          </ng-container>
+          <ng-template #videoContent>
+            <video controls>
+              <source [src]="message.file.url" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </ng-template>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="chat-input">
+    <input [formControl]="messageControl" placeholder="Type your message" (keydown.enter)="sendMessage()" />
+    <input type="file" (change)="onFileSelected($event)" accept="image/*, video/*">
+    <button (click)="sendMessage()">Send</button>
+  </div>
+</div>
+
+<app-youtube-embed [videoId]="'O8GUH0_htRM'"></app-youtube-embed>

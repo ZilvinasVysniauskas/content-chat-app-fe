@@ -1,6 +1,7 @@
 export const LocalStorageKeys = {
     token: 'id_token',
-    expiresAt: 'expires_at'
+    expiresAt: 'expires_at',
+    userId: 'user_id'
 };
 
 export const InputNames = {

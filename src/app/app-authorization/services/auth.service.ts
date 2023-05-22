@@ -15,13 +15,16 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) { }
 
   registerUser(user: RegisterRequest) {
-    return this.http.post<AuthenticationResponse>('/api/users', user).pipe(
-      tap(this.setSession)
+    return this.http.post<AuthenticationResponse>('/api/auth/register', user).pipe(
+      tap((res) => {
+        this.setSession(res);
+        this.router.navigate(['/']);
+      })
     );
   }
 
   loginUser(user: LoginRequest) {
-    return this.http.post<AuthenticationResponse>('/api/users/login', user).pipe(
+    return this.http.post<AuthenticationResponse>('/api/auth/login', user).pipe(
       tap((res) => {
         this.setSession(res);
         this.router.navigate(['/']);
@@ -32,6 +35,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem(LocalStorageKeys.token);
     localStorage.removeItem(LocalStorageKeys.expiresAt);
+    localStorage.removeItem(LocalStorageKeys.userId);
     this.router.navigate(['/auth/login']);
   }
   isLoggedIn() {
@@ -47,6 +51,7 @@ export class AuthService {
     const expiresAt = moment().add(authResult.expiresIn, 'second');
     localStorage.setItem(LocalStorageKeys.token, authResult.token);
     localStorage.setItem(LocalStorageKeys.expiresAt, JSON.stringify(expiresAt.valueOf()));
+    localStorage.setItem(LocalStorageKeys.userId, authResult.userId);
   }
 
 }
