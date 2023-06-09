@@ -1,4 +1,5 @@
 import { HttpInterceptorFn } from "@angular/common/http";
+import { LocalStorageKeys } from "../constants";
 
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
@@ -6,7 +7,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   if (req.url.startsWith('https://chat-app-file-storage')) {
     return next(req);
   }
-  const idToken = localStorage.getItem('id_token');
+  const idToken = localStorage.getItem(LocalStorageKeys.token);
 
   if (idToken) {
     const cloned = req.clone({

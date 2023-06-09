@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +12,7 @@ export class AuthGuard {
     if (this.authService.isLoggedIn()) {
       return true;
     } else {
-      this.router.navigate(['/auth/login']);
+      this.router.navigate(['/login']);
       return false;
     }
   }
