@@ -12,6 +12,7 @@ import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { effects, reducers } from './app/state';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
 
 if (environment.production) {
   enableProdMode();
@@ -19,6 +20,9 @@ if (environment.production) {
 
 bootstrapApplication(AppComponent, {
   providers: [
+    importProvidersFrom(
+      MonacoEditorModule.forRoot()
+    ),
     provideRouter(ROUTES),
     provideHttpClient(withInterceptors([authInterceptor])),
     provideStore(reducers),

@@ -7,6 +7,7 @@ import { OAuth2RedirectGuard } from "./app-authorization/guards/o-auth2-redirect
 import { UserGuard } from "./app-authorization/guards/user-guard/user-guard";
 import { LoginGuard } from "./app-authorization/guards/login-guard/login-guard";
 import { Type } from "@angular/core";
+import { TechInvestigationComponent } from "./app-tech-investigation/tech-investigation/tech-investigation.component";
 
 export const ROUTES: Route[] = [
     {
@@ -18,6 +19,10 @@ export const ROUTES: Route[] = [
         path: 'login',
         component: LoginComponent,
         canActivate: [LoginGuard],
+    },
+    {
+        path: '',
+        component: TechInvestigationComponent
     },
     {
         path: '',
