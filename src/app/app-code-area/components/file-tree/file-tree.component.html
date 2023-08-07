@@ -1,0 +1,9 @@
+<ul *ngIf="projectTreeNode">
+    <app-file *ngIf="projectTreeNode.type == TreeNodeType.FILE" [fileTreeNode]="projectTreeNode"></app-file>
+    <app-directory *ngIf="projectTreeNode.type == TreeNodeType.DIRECTORY" [directoryTreeNode]="projectTreeNode"></app-directory>
+
+    <li *ngFor="let childNode of projectTreeNode.children">
+        <app-file-tree [projectTreeNode]="childNode"></app-file-tree>
+    </li>
+    
+</ul>

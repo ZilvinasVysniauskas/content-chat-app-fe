@@ -1,0 +1,10 @@
+<div fxLayout="row">
+    <div fxFlex="25">
+        <app-file-tree 
+        [projectTreeNode]="projectTreeNode$ | async"
+        ></app-file-tree>
+    </div>
+    <div fxFlex="75">
+        <app-code-editor></app-code-editor>
+    </div>
+</div>
